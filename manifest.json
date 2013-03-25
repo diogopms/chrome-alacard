@@ -14,7 +14,7 @@
     },
     "permissions": [
         "tabs", "https://www.alacard.pt/*",
-        "cookies",
+        "cookies", "storage", 
         "http://*/*.alacard.pt"
     ]
 }

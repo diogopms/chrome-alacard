@@ -16,7 +16,6 @@ var alacardExtension = {
                 chrome.cookies.get({url:"https://www.alacard.pt", name:"sess"},
                     function(value) {
                         remoteURL = 'https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+options.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+options.password+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty';
-                        console.log(key)
                         alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
                     }
                 );
@@ -30,8 +29,9 @@ var alacardExtension = {
             if(request){
                 alacardExtension.dom = document.createElement('div');
                 alacardExtension.dom.innerHTML = request.responseText;
+                console.log(request.responseText);
                 callback();
-            }else console.log('erro')
+            }else console.log('erro');
         };
 
         alacardExtension.sendRequest('GET', remoteURL, handleFirstPhase);
@@ -39,14 +39,18 @@ var alacardExtension = {
 
     getBalance: function(){
         var saldoElem = getElementByClass('currencyAmountBold', alacardExtension.dom);
-        return saldoElem.innerHTML;
+        console.log(alacardExtension.dom)
+        if(saldoElem)
+            return saldoElem.innerHTML;
     },
 
     sendRequest: function(method, url, callback){
         var request = new XMLHttpRequest();
-        request.open("GET", url, true);
+        request.open(method, url, true);
+
         request.onreadystatechange = function(){
-            if (request.readyState == 4 && request.status == 200){
+            console.log(url);
+            if (request.status == 200){
                 callback(request);
             }else{
                 callback(false);
@@ -54,11 +58,6 @@ var alacardExtension = {
         }
         request.send();        
     }
-};
-
-var options = {
-    cardNumber: 'CARDNUMBER',
-    password: 'PASSWORD'
 };
 
 function getElementByClass(className, html) {
@@ -72,7 +71,7 @@ function getElementByClass(className, html) {
 };
 
 document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById("balance_placeholder").innerHTML = '<img src="../img/loader.gif" alt="loading"/>';
+    document.getElementById("balance_placeholder").innerHTML = '';//'<img src="../img/loader.gif" alt="loading"/>';
     alacardExtension.init(function(){
         document.getElementById('balance_placeholder').innerHTML = alacardExtension.getBalance();
     });

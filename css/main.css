@@ -1,0 +1,255 @@
+body {
+    width: 288px;
+    background-color: #fff;
+/*    background: #fff url(../img/mira-alacard.png) no-repeat 0 0;*/
+    font-size: 14px;
+    padding: 10px;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 200;
+    color: #014a1c;
+    -webkit-font-smoothing: antialiased;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 0;
+    margin: 0;
+}
+
+a{
+	color: #9d6a4a;
+	text-decoration: none;
+	
+	-webkit-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	   -moz-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	    -ms-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	     -o-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	        transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+a:hover{
+	color: #212121;
+	text-decoration: none;
+}
+p{
+	font-family: 'Dosis', sans-serif;
+	font-weight: 400;
+	color: #515151;
+}
+#container{
+	padding: 0;
+	margin: 0;
+}
+.logo{
+	margin: 0 0 0 4px;
+	width: 257px;
+	height: 129px;
+	display: block;
+	background: #fff url(../img/logo-alacard_1.png) no-repeat 0 0;
+	text-indent: -99999em;
+}
+.holder-colors{
+	width: 288px;
+	height: 4px;
+	float: left;
+	overflow: hidden;
+	margin-top: -22px;
+}
+.reset-top{
+	margin-top: 29px;
+}
+.line-yellow{
+	width: 25%;
+	height: 4px;
+	float: left;
+	background: #f9da23;
+}
+.line-red{
+	width: 25%;
+	height: 4px;
+	float: left;
+	background: #e41432;
+}
+.line-orange{
+	width: 25%;
+	height: 4px;
+	float: left;
+	background: #f19823;
+}
+.line-green{
+	width: 25%;
+	height: 4px;
+	float: left;
+	background: #78a459;
+}
+.clip-red{
+	width: 25px;
+	height: 25px;
+	overflow: hidden;
+	position: relative;
+	top: 6px;
+	left: 119px;
+}
+.border-red{
+	-webkit-border-radius: 50px;
+	border-radius:50px;
+	background-color: #e41432;
+	width: 50px;
+	height: 50px;
+	display: block;
+	
+}
+.clip-orange{
+	width: 26px;
+	height: 25px;
+	overflow: hidden;
+	position: relative;
+	top: -19px;
+	left: 144px;
+}
+.border-orange{
+	-webkit-border-radius: 50px;
+	border-radius:50px;
+	background-color: #f19823;
+	width: 51px;
+	height: 50px;
+	display: block;
+	margin: 0 -25px;
+}
+
+a.btn-logout{
+	float: right;
+	font-size: 1em;
+	font-weight: 400;
+	padding-right: 5px;
+	padding-top: 5px;
+}
+a.btn-historico{
+width: 41px;
+height: 41px;
+-webkit-border-radius: 50px;
+border-radius: 50px;
+/*text-indent: -99999em;*/
+float: left;
+position: relative;
+top: -39px;
+left: 124px;
+background: #fff url(../img/icon-historic.png) no-repeat -4px -5px;
+cursor: pointer;
+}
+a.btn-historico:hover{
+background: #78a459 url(../img/icon-historic.png) no-repeat -4px -47px;
+}
+
+a.btn-historico span{
+color: #fff;
+position: relative;
+top: -9px;
+left: 78px;
+font-size: 1em;
+font-weight: 400;
+}
+a.btn-historico:hover span{
+color: #78a459;
+position: relative;
+top: -9px;
+left: 78px;
+font-size: 1em;
+font-weight: 400;
+}
+
+.info{
+	background: #b5d1a0;
+	float: left;
+	margin: -59px 0;
+	width: 100%;
+}
+
+.info p{
+	color: #fff;
+	font-size: 1.45em;
+	margin: 0;
+	padding: 15px 0 13px 21px;
+	font-weight: 400;
+}
+
+.login{
+	background: #b5d1a0;
+	float: left;
+	margin: -22px 0;
+	width: 100%;
+}
+.label-login{
+color: #78a459;
+position: relative;
+float: right;
+right: 18px;
+top: -34px;
+font-size: 1em;
+font-weight: 400;
+}
+.info #balance_placeholder{
+	color: #014a1c;
+	font-size: 1.2em;
+	font-weight: 400;
+	padding-left: 35px;
+}
+.login-form, fieldset{
+	border: none;
+	color: #fff;
+	font-size: 1em;
+	font-weight: 400;
+}
+fieldset{
+	padding-bottom: 0;
+	height: 76px;
+}
+.login-form{
+	padding-top: 10px;
+}
+.login-form label{
+	float: left;
+	width: 40%;
+	margin-top: -2px;
+}
+.login-form input{
+font-family: 'Dosis', sans-serif;
+font-weight: 400;
+font-size: .85em;
+	float: left;
+	width: 63%;
+	height: 30px;
+	border: none;
+	color: #014a1c;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+.login-form input:first-child{
+	margin-bottom: 15px;
+	width: 100%;
+}
+input::-webkit-input-placeholder  {
+	color: #78a459;  
+}
+.login-form input[type="submit"]{
+	float: right;
+	width: 30%;
+	border: none;
+	background: #78a459;
+	color: #fff;
+	cursor: pointer;
+	font-family: 'Dosis', sans-serif;
+	font-weight: 400;
+	padding: 5px 0;
+	margin: 0;
+	font-size: .9em;
+	letter-spacing: 1px;
+	
+	-webkit-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	   -moz-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	    -ms-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	     -o-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	        transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+.login-form input[type="submit"]:hover{
+	background: #e41432;
+}

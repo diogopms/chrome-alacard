@@ -3,27 +3,49 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="css/main.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Dosis:200,400,500' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="/js/config.js"></script>
     <script type="text/javascript" src="/js/alacard.js"></script>
     </head>
     <body>
         <div id="container">
+            <a href="#" class="btn-logout" id="logout" ><span>Logout</span></a>
             <div class="logo">A La Card</div>
-            <div class="clip-red">
-                <div class="border-red"></div>
+            <div id="notlogged-content" style="display: none;">
+                <div class="holder-colors reset-top">
+                    <div class="line-yellow"></div>
+                    <div class="line-red"></div>
+                    <div class="line-orange"></div>
+                    <div class="line-green"></div>
+                </div>
+                <div class="label-login">Login</div>
+                <div class="login">
+                    <form class="login-form" method="post" id="form">
+                        <fieldset>
+                            <input type="text" id="cardnumber" placeholder="Insira o nr. do seu cartão à la card...">
+                            <br>
+                            <input type="password" id="password" placeholder="Insira a sua password...">
+                            <br>
+                            <input type="submit" value="Entrar" />
+                        </fieldset>
+                    </form>
+                </div>
             </div>
-            <div class="clip-orange">
-                <div class="border-orange"></div>
-            </div>
-            <div class="holder-colors">
-                <div class="line-yellow"></div>
-                <div class="line-red"></div>
-                <div class="line-orange"></div>
-                <div class="line-green"></div>
-            </div>
-            <a href="#" class="btn-historico"><span>Histórico</span></a>
-            <div class="info">
-            <p>Saldo Actual:<span id="balance_placeholder">€ 295.00</span></p>
+            <div id="logged-content" style="display: none;">
+                <div class="clip-red">
+                    <div class="border-red"></div>
+                </div>
+                <div class="clip-orange">
+                    <div class="border-orange"></div>
+                </div>
+                <div class="holder-colors">
+                    <div class="line-yellow"></div>
+                    <div class="line-red"></div>
+                    <div class="line-orange"></div>
+                    <div class="line-green"></div>
+                </div>
+                <a href="#" class="btn-historico"><span>Histórico</span></a>
+                <div class="info">
+                <p>Saldo Actual:<span id="balance_placeholder"></span></p>
+                </div>
             </div>
         </div>
     </body>

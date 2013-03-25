@@ -115,6 +115,14 @@ p{
 	display: block;
 	margin: 0 -25px;
 }
+
+a.btn-logout{
+	float: right;
+	font-size: 1em;
+	font-weight: 400;
+	padding-right: 5px;
+	padding-top: 5px;
+}
 a.btn-historico{
 width: 41px;
 height: 41px;

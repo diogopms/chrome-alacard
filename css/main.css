@@ -216,7 +216,7 @@ font-family: 'Dosis', sans-serif;
 font-weight: 400;
 font-size: .85em;
 	float: left;
-	width: 63%;
+	width: 146px;
 	height: 30px;
 	border: none;
 	color: #014a1c;
@@ -225,7 +225,7 @@ font-size: .85em;
 }
 .login-form input:first-child{
 	margin-bottom: 15px;
-	width: 100%;
+	width: 240px;
 }
 input::-webkit-input-placeholder  {
 	color: #78a459;  

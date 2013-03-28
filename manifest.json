@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name":  "alacard",
     "version": "0.0.1",
-    "description": "Get the balance of your alacard account in your browser",
+    "description": "Consulte o saldo e movimentos do seu cartão BES Alacard",
     "browser_action": {
         "default_icon": "img/icon128.png",
         "default_title": "alacard",
@@ -12,6 +12,7 @@
         "48": "img/icon48.png",
         "128": "img/icon128.png"
     },
+    "options_page": "options.html",
     "permissions": [
         "tabs", "https://www.alacard.pt/*",
         "cookies", "storage", 

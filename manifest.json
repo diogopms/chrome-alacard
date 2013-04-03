@@ -15,6 +15,6 @@
     "options_page": "options.html",
     "permissions": [
         "tabs", "https://www.alacard.pt/*",
-        "storage"
+        "storage","cookies"
     ]
 }

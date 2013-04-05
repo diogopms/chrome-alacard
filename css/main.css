@@ -256,11 +256,7 @@ input::-webkit-input-placeholder  {
 
 .col-yellow{
 	width: 25%;
-	background: rgba(249, 218, 35, 0.4);
-	*background: #f9da23;
-	*background: #e41432;
-	*background: #f19823;
-	*background: #78a459;
+	background: rgba(249, 218, 35, 0.7);
 }
 .col-red{
 	width: 25%;
@@ -268,11 +264,11 @@ input::-webkit-input-placeholder  {
 }
 .col-orange{
 	width: 25%;
-	background: rgba(241, 152, 35, 0.4);
+	background: rgba(241, 152, 35, 0.7);
 }
 .col-green{
 	width: 25%;
-	background: rgba(120, 164, 89, 0.4);
+	background: rgba(120, 164, 89, 0.7);
 }
 .table-historico{
 	padding-top: 5px;
@@ -280,14 +276,16 @@ input::-webkit-input-placeholder  {
 	text-align: center;
 	line-height: 1em;
 	font-size: 14px;
+	margin-top: -15px;
 }
 .table-historico thead{
 	background: #b5d1a0;
 	border-spacing: 0px;
 }
-.table-historico tbody{
-	*opacity: 0.5;
+.title-table-historico{
+	*margin-top: 48px;
+	*margin-left: 7px;
 }
-.table-historico tbody tr td{
-	*opacity: 1;
+.div-historico{
+	background: #b5d1a0;
 }

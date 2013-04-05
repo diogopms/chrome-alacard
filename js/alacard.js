@@ -156,6 +156,16 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     });
 
+    var historicBtn = document.getElementById("btn-historico"); 
+    var historicDiv = document.getElementById("historic-content");
+    historicBtn.addEventListener('click', function(){
+        if(historicDiv.style.display == "none"){
+            historicDiv.style.display = "block";
+        }else{
+            historicDiv.style.display = "none";
+        }
+    });
+
     var initHandler = function(){
         var balance = alacardExtension.getBalance();
         document.getElementById('balance_placeholder').innerHTML = balance ? balance : 'erro';

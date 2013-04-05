@@ -256,19 +256,23 @@ input::-webkit-input-placeholder  {
 
 .col-yellow{
 	width: 25%;
-	background: #f9da23;
+	background: rgba(249, 218, 35, 0.4);
+	*background: #f9da23;
+	*background: #e41432;
+	*background: #f19823;
+	*background: #78a459;
 }
 .col-red{
 	width: 25%;
-	background: #e41432;
+	background: rgba(228, 20, 50, 0.4);
 }
 .col-orange{
 	width: 25%;
-	background: #f19823;
+	background: rgba(241, 152, 35, 0.4);
 }
 .col-green{
 	width: 25%;
-	background: #78a459;
+	background: rgba(120, 164, 89, 0.4);
 }
 .table-historico{
 	padding-top: 5px;
@@ -276,14 +280,14 @@ input::-webkit-input-placeholder  {
 	text-align: center;
 	line-height: 1em;
 	font-size: 14px;
-
 }
 .table-historico thead{
 	background: #b5d1a0;
 	border-spacing: 0px;
-	border-color: #b5d1a0;
 }
-
-.table-historico thead tr td{
-	padding: 2px;
+.table-historico tbody{
+	*opacity: 0.5;
+}
+.table-historico tbody tr td{
+	*opacity: 1;
 }

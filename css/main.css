@@ -253,3 +253,37 @@ input::-webkit-input-placeholder  {
 .login-form input[type="submit"]:hover{
 	background: #e41432;
 }
+
+.col-yellow{
+	width: 25%;
+	background: #f9da23;
+}
+.col-red{
+	width: 25%;
+	background: #e41432;
+}
+.col-orange{
+	width: 25%;
+	background: #f19823;
+}
+.col-green{
+	width: 25%;
+	background: #78a459;
+}
+.table-historico{
+	padding-top: 5px;
+	margin-left: -2px;
+	text-align: center;
+	line-height: 1em;
+	font-size: 14px;
+
+}
+.table-historico thead{
+	background: #b5d1a0;
+	border-spacing: 0px;
+	border-color: #b5d1a0;
+}
+
+.table-historico thead tr td{
+	padding: 2px;
+}

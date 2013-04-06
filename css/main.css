@@ -253,3 +253,39 @@ input::-webkit-input-placeholder  {
 .login-form input[type="submit"]:hover{
 	background: #e41432;
 }
+
+.col-yellow{
+	width: 25%;
+	background: rgba(249, 218, 35, 0.7);
+}
+.col-red{
+	width: 25%;
+	background: rgba(228, 20, 50, 0.4);
+}
+.col-orange{
+	width: 25%;
+	background: rgba(241, 152, 35, 0.7);
+}
+.col-green{
+	width: 25%;
+	background: rgba(120, 164, 89, 0.7);
+}
+.table-historico{
+	padding-top: 5px;
+	margin-left: -2px;
+	text-align: center;
+	line-height: 1em;
+	font-size: 14px;
+	margin-top: -15px;
+}
+.table-historico thead{
+	background: #b5d1a0;
+	border-spacing: 0px;
+}
+.title-table-historico{
+	*margin-top: 48px;
+	*margin-left: 7px;
+}
+.div-historico{
+	background: #b5d1a0;
+}

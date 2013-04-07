@@ -1,6 +1,8 @@
 var alacardExtension = {
-    
-    dom: null,
+
+    balance: null,
+
+    history: null,
 
     options: {},
 
@@ -26,24 +28,21 @@ var alacardExtension = {
 
         var handleSecondPhase = function(request){
             if(request){
-                alacardExtension.dom = document.createElement('div');
-                alacardExtension.dom.innerHTML = request.responseText;
+                var tmpDoc = document.createElement('html');
+                tmpDoc.innerHTML = request.responseText;
+                var balanceElem = tmpDoc.getElementsByClassName('currencyAmountBold');
+                alacardExtension.balance = balanceElem.length > 0 ? balanceElem[0].innerHTML : null;
+                alacardExtension.history = tmpDoc.getElementsByTagName('table')[8];
                 callback();
-            }else console.log('erro');
+            } else {
+                console.log('erro');
+            }
         };
-
         alacardExtension.sendRequest('GET', remoteURL, handleFirstPhase);
     },
 
-    getBalance: function(){
-        var saldoElem = getByClass('currencyAmountBold', alacardExtension.dom);
-        if(saldoElem){
-            return saldoElem.innerHTML;
-        }
-    },
-
-    getHistoric: function (){
-        var table = getById('csr/menu/transactions.jsp:transaction_history', alacardExtension.dom);
+    getHistory: function (){
+        var table = alacardExtension.history;
         var Movimento = function(data, desc, valor, controlo){
             this.data     = data;
             this.desc     = desc;
@@ -66,7 +65,7 @@ var alacardExtension = {
         all_movimentos.pop();
 
         var html = '';
-        for(var i=0; i<all_movimentos.length; i++){
+        for(var i=0, mlength = all_movimentos.length; i<mlength; i++){
             html += '<tr>'+
                         '<td class="col-yellow">'+all_movimentos[i][0]+'</td>'+
                         '<td class="col-red">'+all_movimentos[i][1]+'</td>'+
@@ -126,23 +125,6 @@ var alacardExtension = {
     }
 };
 
-function getByClass(className, html) {
-    var elems = html.getElementsByTagName('*');
-    for (var i in elems) {
-        if(elems[i].className === className){
-            return elems[i];
-        }
-    }
-};
-function getById(id, html) {
-    var elems = html.getElementsByTagName('*');
-    for (var i in elems) {
-        if(elems[i].id === id){
-            return elems[i];
-        }
-    }
-};
-
 document.addEventListener('DOMContentLoaded', function(){
     document.getElementById("balance_placeholder").innerHTML = 'a carregar';//'<img src="../img/loader.gif" alt="loading"/>';
 
@@ -164,10 +146,10 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     var initHandler = function(){
-        var balance = alacardExtension.getBalance();
+        var balance = alacardExtension.balance;
         document.getElementById('balance_placeholder').innerHTML = balance ? balance : 'erro';
 
-        var historic = alacardExtension.getHistoric();
+        var historic = alacardExtension.getHistory();
     }
 
     var loginHandler = function(logged){

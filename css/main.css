@@ -1,3 +1,4 @@
+/* page popup */
 body {
     width: 288px;
     background-color: #fff;
@@ -30,6 +31,14 @@ a:hover{
 	color: #212121;
 	text-decoration: none;
 }
+a:focus { 
+    outline: none; 
+}
+
+button:focus { 
+    outline: none; 
+}
+
 p{
 	font-family: 'Dosis', sans-serif;
 	font-weight: 400;
@@ -118,17 +127,21 @@ p{
 
 a.btn-logout{
 	float: right;
-	font-size: 1em;
+	font-size: .9em;
 	font-weight: 400;
-	padding-right: 5px;
+	padding-right: 10px;
 	padding-top: 5px;
+	color: #b5d1a0;
+	
+}
+a.btn-logout:hover{
+	color: #e41432;
 }
 a.btn-historico{
 width: 41px;
 height: 41px;
 -webkit-border-radius: 50px;
 border-radius: 50px;
-/*text-indent: -99999em;*/
 float: left;
 position: relative;
 top: -39px;
@@ -256,19 +269,19 @@ input::-webkit-input-placeholder  {
 
 .col-yellow{
 	width: 25%;
-	background: rgba(249, 218, 35, 0.7);
 }
+
 .col-red{
 	width: 25%;
-	background: rgba(228, 20, 50, 0.4);
+	font-size: 85%;
 }
 .col-orange{
 	width: 25%;
-	background: rgba(241, 152, 35, 0.7);
+
 }
 .col-green{
 	width: 25%;
-	background: rgba(120, 164, 89, 0.7);
+
 }
 .table-historico{
 	padding-top: 5px;
@@ -277,10 +290,26 @@ input::-webkit-input-placeholder  {
 	line-height: 1em;
 	font-size: 14px;
 	margin-top: -15px;
+	border-collapse: collapse;
+	font-weight: 400;
+	color: #3f7847;
 }
+
+.table-historico tr.header td{
+	color: #fff;
+	font-weight: 500;
+	height: 20px;
+	border-spacing: 0px;
+	vertical-align: middle;
+	padding: 16px 0 8px 0;
+}
+.table-historico tr.header {
+	background-color: #78a459;
+}
+
 .table-historico thead{
 	background: #b5d1a0;
-	border-spacing: 0px;
+	border-spacing: 1px;
 }
 .title-table-historico{
 	*margin-top: 48px;
@@ -289,3 +318,49 @@ input::-webkit-input-placeholder  {
 .div-historico{
 	background: #b5d1a0;
 }
+
+.table-historico tbody > tr{
+	background-color: #c7ddb1;
+	height: 50px;
+}
+
+.table-historico tbody > tr > td{
+	border-right: 1px solid #b5d1a0;
+}
+
+.table-historico tbody > tr:nth-child(odd) > td,
+.table-historico tbody > tr:nth-child(odd) > th {
+  background-color: #d3e4c2;
+}
+/* // page popup */
+
+/* page options */
+
+body.options {
+    width: 100%;
+    background-color: #fff;
+/*    background: #fff url(../img/mira-alacard.png) no-repeat 0 0;*/
+    font-size: 14px;
+    padding: 10px;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 200;
+    color: #014a1c;
+    -webkit-font-smoothing: antialiased;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 0;
+    margin: 0;
+}
+
+.options .wrapper{
+	width: 960px;
+	margin: 0 auto;
+}
+.options #container{
+	width: 100%;
+	background-color: #b5d1a0;
+}
+
+

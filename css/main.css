@@ -1,8 +1,16 @@
+/* 
+    Document   : style
+    Created on : Apr 7, 2013
+    Author     : Pedro Borges
+    URL        : https://github.com/pfdborges
+    Description:
+        Styling for the Alacard Chrome Extension
+*/
+
 /* page popup */
 body {
     width: 288px;
     background-color: #fff;
-/*    background: #fff url(../img/mira-alacard.png) no-repeat 0 0;*/
     font-size: 14px;
     padding: 10px;
     font-family: 'Dosis', sans-serif;
@@ -20,7 +28,6 @@ body {
 a{
 	color: #9d6a4a;
 	text-decoration: none;
-	
 	-webkit-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	   -moz-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	    -ms-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -225,9 +232,9 @@ fieldset{
 	margin-top: -2px;
 }
 .login-form input{
-font-family: 'Dosis', sans-serif;
-font-weight: 400;
-font-size: .85em;
+	font-family: 'Dosis', sans-serif;
+	font-weight: 400;
+	font-size: .85em;
 	float: left;
 	width: 146px;
 	height: 30px;
@@ -256,7 +263,6 @@ input::-webkit-input-placeholder  {
 	margin: 0;
 	font-size: .9em;
 	letter-spacing: 1px;
-	
 	-webkit-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	   -moz-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	    -ms-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);

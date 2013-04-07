@@ -159,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function(){
     logoutBtn.addEventListener('click', function(){
         alacardExtension.logout(function(){
             logoutBtn.style.display = "none";
+            historicDiv.style.display = "none";
         });
     });
 

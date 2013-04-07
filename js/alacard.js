@@ -15,12 +15,9 @@ var alacardExtension = {
                 doc.innerHTML = html;
                 var key = doc.getElementsByTagName("input")[1].value;
                 var action = doc.getElementsByTagName("form")[0].getAttribute('action');
-                chrome.cookies.get({url:"https://www.alacard.pt", name:"sess"},
-                    function(value) {
-                        remoteURL = 'https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.password+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
-                        alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
-                    }
-                );
+
+                remoteURL = 'https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.password+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
+                alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
             }
             else{
                console.log("Erro no servidor!");
@@ -39,10 +36,46 @@ var alacardExtension = {
     },
 
     getBalance: function(){
-        var saldoElem = getElementByClass('currencyAmountBold', alacardExtension.dom);
+        var saldoElem = getByClass('currencyAmountBold', alacardExtension.dom);
         if(saldoElem){
             return saldoElem.innerHTML;
         }
+    },
+
+    getHistoric: function (){
+        var table = getById('csr/menu/transactions.jsp:transaction_history', alacardExtension.dom);
+        var Movimento = function(data, desc, valor, controlo){
+            this.data     = data;
+            this.desc     = desc;
+            this.valor    = valor;
+            this.controlo = controlo;
+        }
+        var all_movimentos = [], coluna;
+
+        for (var i = 1, row; row = table.rows[i]; i++){
+            var movimento = [];
+            for (var j = 0, col; col = row.cells[j]; j++){
+                if(j == 0 || j == 3 || j == 4 || j == 6){
+                    coluna = col.innerHTML.replace(/\s+/g, ' ');
+                    movimento.push(coluna)
+                }
+            }
+            all_movimentos.push(movimento);
+        }
+
+        all_movimentos.pop();
+
+        var html = '';
+        for(var i=0; i<all_movimentos.length; i++){
+            html += '<tr>'+
+                        '<td class="col-yellow">'+all_movimentos[i][0]+'</td>'+
+                        '<td class="col-red">'+all_movimentos[i][1]+'</td>'+
+                        '<td class="col-orange">'+all_movimentos[i][2]+'</td>'+
+                        '<td class="col-green">'+all_movimentos[i][3]+'</td>'+
+                    '</tr>';
+        }
+        document.getElementById('thistorico').innerHTML = html;
+        console.log(all_movimentos);
     },
 
     sendRequest: function(method, url, callback){
@@ -93,10 +126,18 @@ var alacardExtension = {
     }
 };
 
-function getElementByClass(className, html) {
+function getByClass(className, html) {
     var elems = html.getElementsByTagName('*');
     for (var i in elems) {
         if(elems[i].className === className){
+            return elems[i];
+        }
+    }
+};
+function getById(id, html) {
+    var elems = html.getElementsByTagName('*');
+    for (var i in elems) {
+        if(elems[i].id === id){
             return elems[i];
         }
     }
@@ -112,9 +153,21 @@ document.addEventListener('DOMContentLoaded', function(){
         });
     });
 
+    var historicBtn = document.getElementById("btn-historico"); 
+    var historicDiv = document.getElementById("historic-content");
+    historicBtn.addEventListener('click', function(){
+        if(historicDiv.style.display == "none"){
+            historicDiv.style.display = "block";
+        }else{
+            historicDiv.style.display = "none";
+        }
+    });
+
     var initHandler = function(){
         var balance = alacardExtension.getBalance();
         document.getElementById('balance_placeholder').innerHTML = balance ? balance : 'erro';
+
+        var historic = alacardExtension.getHistoric();
     }
 
     var loginHandler = function(logged){

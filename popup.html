@@ -44,10 +44,24 @@
                     <div class="line-orange"></div>
                     <div class="line-green"></div>
                 </div>
-                <a href="#" class="btn-historico"><span>Histórico</span></a>
+                <a href="#" id="btn-historico" class="btn-historico"><span>Histórico</span></a>
                 <div class="info">
                 <p>Saldo Actual:<span id="balance_placeholder"></span></p>
                 </div>
+            </div>
+            <div class="div-historico" style="display: none;" id="historic-content">
+                <table class="table-historico" >
+                    <thead>
+                        <tr>
+                            <td>data</td>
+                            <td>descrição</td>
+                            <td>valor</td>
+                            <td>controlo</td>
+                        </tr>
+                    </thead>
+                    <tbody id="thistorico">
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>

@@ -1,3 +1,4 @@
+/* page popup */
 body {
     width: 288px;
     background-color: #fff;
@@ -331,3 +332,35 @@ input::-webkit-input-placeholder  {
 .table-historico tbody > tr:nth-child(odd) > th {
   background-color: #d3e4c2;
 }
+/* // page popup */
+
+/* page options */
+
+body.options {
+    width: 100%;
+    background-color: #fff;
+/*    background: #fff url(../img/mira-alacard.png) no-repeat 0 0;*/
+    font-size: 14px;
+    padding: 10px;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 200;
+    color: #014a1c;
+    -webkit-font-smoothing: antialiased;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 0;
+    margin: 0;
+}
+
+.options .wrapper{
+	width: 960px;
+	margin: 0 auto;
+}
+.options #container{
+	width: 100%;
+	background-color: #b5d1a0;
+}
+
+

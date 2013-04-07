@@ -18,7 +18,7 @@ var alacardExtension = {
                 var key = doc.getElementsByTagName("input")[1].value;
                 var action = doc.getElementsByTagName("form")[0].getAttribute('action');
 
-                remoteURL = 'https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.password+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
+                remoteURL = 'https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.auth.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.auth.cardPassword+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
                 alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
             }
             else{
@@ -43,12 +43,6 @@ var alacardExtension = {
 
     getHistory: function (){
         var table = alacardExtension.history;
-        var Movimento = function(data, desc, valor, controlo){
-            this.data     = data;
-            this.desc     = desc;
-            this.valor    = valor;
-            this.controlo = controlo;
-        }
         var all_movimentos = [], coluna;
 
         for (var i = 1, row; row = table.rows[i]; i++){
@@ -74,7 +68,7 @@ var alacardExtension = {
                     '</tr>';
         }
         document.getElementById('thistorico').innerHTML = html;
-        console.log(all_movimentos);
+        //console.log(all_movimentos);
     },
 
     sendRequest: function(method, url, callback){
@@ -92,26 +86,29 @@ var alacardExtension = {
     },
 
     checkLogin: function(callback){
-        var logged = false;
+        var hasCredentials = false;
         chrome.storage.sync.get('options', function(value){
-            if (value.options && value.options.hasOwnProperty('cardNumber')){
+            console.log(value);
+            if (value.options && value.options.auth.cardNumber){
                 alacardExtension.options = value.options;
                 document.getElementById('logged-content').style.display = "block";
                 document.getElementById('notlogged-content').style.display = "none";
-                logged = true;
+                hasCredentials = true;
             }
             else{
+                alacardExtension.optionsSetup();
                 document.getElementById('notlogged-content').style.display = "block";
                 document.getElementById('logged-content').style.display = "none";
             }
             if(callback){
-                callback(logged);
+                callback(hasCredentials);
             }
         });
     },
 
-    saveOptions: function(cardNumber, password, callback){
-        alacardExtension.options = {cardNumber: cardNumber, password: password};
+    saveCredentials: function(cardNumber, cardPassword, callback){
+        alacardExtension.options.auth.cardNumber = cardNumber;
+        alacardExtension.options.auth.cardPassword = cardPassword;
         chrome.storage.sync.set({options: alacardExtension.options});
         if(callback){
             callback();
@@ -122,6 +119,19 @@ var alacardExtension = {
         alacardExtension.options = null;
         chrome.storage.sync.set({options: null});
         alacardExtension.checkLogin();
+    },
+
+    optionsSetup: function(){
+        alacardExtension.options = {
+            auth: {
+                cardNumber: null,
+                cardPassword: null
+            },
+            updateInterval: 60,
+            alertLowBalance: false,
+            lastUpdate: 0
+        };
+        chrome.storage.sync.set({options: alacardExtension.options});
     }
 };
 
@@ -152,8 +162,8 @@ document.addEventListener('DOMContentLoaded', function(){
         var historic = alacardExtension.getHistory();
     }
 
-    var loginHandler = function(logged){
-        if(logged){            
+    var loginHandler = function(hasCredentials){
+        if(hasCredentials){            
             logoutBtn.style.display = "block"; //hide logout button
             alacardExtension.init(initHandler);
         }else{
@@ -167,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById("balance_placeholder").innerHTML = 'a carregar';
         var card = document.getElementById('cardnumber').value;
         var pass = document.getElementById('password').value;
-        alacardExtension.saveOptions(card, pass, function(){
+        alacardExtension.saveCredentials(card, pass, function(){
             alacardExtension.checkLogin(loginHandler);
         });
         return false;

@@ -139,11 +139,40 @@ a.btn-logout{
 	padding-right: 10px;
 	padding-top: 5px;
 	color: #b5d1a0;
-	
+	display: none;
 }
 a.btn-logout:hover{
 	color: #e41432;
 }
+
+a.btn-options{
+	float: right;
+	font-size: .9em;
+	font-weight: 400;
+	padding-right: 10px;
+	padding-top: 5px;
+	color: #b5d1a0;
+	cursor: pointer;
+}
+a.btn-options:hover{
+	color: #014a1c;
+}
+a.btn-options span{
+	float: right;
+	height: 21px;
+	width: 21px;
+	background: transparent url(../img/options.png) 0px 0px no-repeat;
+	cursor: pointer;
+	margin: 0px 4px 0 3px;
+}
+a.btn-options span:hover{
+	background: transparent url(../img/options.png) 0px -20px no-repeat;
+}
+
+a.btn-options:hover span{
+	background: transparent url(../img/options.png) 0px -20px no-repeat;
+}
+
 a.btn-historico{
 width: 41px;
 height: 41px;
@@ -213,6 +242,32 @@ font-weight: 400;
 	font-weight: 400;
 	padding-left: 35px;
 }
+
+.info .actual{
+	background-color: #78a459;
+	width: 100%;
+	padding: 5px 0 5px 22px;
+	color: #fff;
+	text-align: left;
+	font-size: .8em;
+	font-weight: 500;
+	margin-top: -5px;
+}
+
+.info .actual a{
+	height: 18px;
+	width: 22px;
+	background: transparent url(../img/options.png) 0px -119px no-repeat;
+	display: inline-block;
+	position: relative;
+	top: 2px;
+	left: 5px;
+}
+.info .actual a:hover {
+background: transparent url(../img/options.png) 0px -140px no-repeat;
+}
+
+
 .login-form, fieldset{
 	border: none;
 	color: #fff;
@@ -274,7 +329,8 @@ input::-webkit-input-placeholder  {
 }
 
 #update_interval{
-    width: 115px;
+    width: 35px;
+    margin-right: 13px;
 }
 
 .col-yellow{
@@ -445,7 +501,12 @@ body.options {
 }
 .auth label{
 	float: left;
-	width: 41%;
+	width: 30%;
+	display: block;
+}
+.auth label.min{
+	float: left;
+	width: auto;
 	display: block;
 }
 .auth input{
@@ -495,7 +556,7 @@ font-size: .85em;
 	font-family: 'Dosis', sans-serif;
 	font-weight: 400;
 	padding: 5px 0;
-	margin: 10px 225px;
+	margin: -15px 165px;
 	font-size: .9em;
 	letter-spacing: 1px;
 	
@@ -514,4 +575,27 @@ font-size: .85em;
 }
 .auth label.alert{
 	margin-top: 8px;
+}
+.legend{
+	color: #fff;
+	float: left;
+	font-size: .85em;
+	clear: left;
+	margin-top: -14px;
+	font-weight: 400;
+	width: 156px;
+}
+#status{
+	color: #fff;
+	background-color: #78a459;
+	position: relative;
+	float: left;
+	padding: 4px 9px;
+	margin: 0px 15px;
+}
+#status span.icon{
+	height: 18px;
+	width: 29px;
+	background: transparent url(../img/options.png) 0px -87px no-repeat;
+	display: inline-block;
 }

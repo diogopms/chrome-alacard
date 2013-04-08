@@ -50,7 +50,6 @@
     <div class="wrapper">
     
     <div class="auth">
-        <p id="status"></p>
         <h3>Autenticação</h3>
         <label>Número de Cartão</label>
         <input type="text" id="card_number" name="card_number" placeholder="Insira o nr. do seu cartão à la card...">
@@ -62,9 +61,12 @@
         <input type="checkbox" value="none" name="alert_balance" id="alacard-checkbox">
         <label class="checkalacard" for="alacard-checkbox"></label>-->
         <br>
-        <label>Actualizar o saldo a cada X minutos?</label>
+        <label>Intervalo de Actualização</label>
         <input type="text" name="update_interval" id="update_interval" placeholder="Indique o nr. de horas para actualização...">
-        <br>
+        <label class="min">minutos</label>
+        <p id="status"><span class="icon"></span></p>
+        <br />
+ 		<p class="legend">Para actualizar sempre o saldo, inserir 0</p>
         <input type="submit" class="btn-entrar" id="save_options_btn" value="Guardar">
     </div> <!-- // auth -->
     </div>

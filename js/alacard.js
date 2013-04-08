@@ -1,3 +1,5 @@
+"use strict";
+
 var alacardExtension = {
 
     balance: null,
@@ -7,6 +9,17 @@ var alacardExtension = {
     options: {},
 
     init: function(callback){
+        if (alacardExtension.options.cache.balance){
+            var lastUpdate = alacardExtension.options.cache.lastUpdate,
+                updateInterval = (alacardExtension.options.updateInterval * 60) * 1000,
+                currentTime = new Date().getTime();
+
+            if ((currentTime - lastUpdate) <= updateInterval){
+                alacardExtension.balance = alacardExtension.options.cache.balance;
+                alacardExtension.history = alacardExtension.options.cache.history;
+                return callback();
+            }
+        }
 
         var remoteURL = "https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp";
 
@@ -32,7 +45,12 @@ var alacardExtension = {
                 tmpDoc.innerHTML = request.responseText;
                 var balanceElem = tmpDoc.getElementsByClassName('currencyAmountBold');
                 alacardExtension.balance = balanceElem.length > 0 ? balanceElem[0].innerHTML : null;
-                alacardExtension.history = tmpDoc.getElementsByTagName('table')[8];
+                var table = tmpDoc.getElementsByTagName('table')[8];
+                alacardExtension.history = table.innerHTML;
+
+                // cache it!
+                alacardExtension.saveToCache();
+                tmpDoc = undefined;
                 callback();
             } else {
                 console.log('erro');
@@ -42,10 +60,12 @@ var alacardExtension = {
     },
 
     getHistory: function (){
-        var table = alacardExtension.history;
+        var table = document.createElement('table');
+        table.innerHTML = alacardExtension.history;
         var all_movimentos = [], coluna, debito;
 
-        for (var i = 1, row; row = table.rows[i]; i++){
+        var rows = table.getElementsByTagName('tr');
+        for (var i = 1, row; row = rows[i]; i++){
             debito = true;
             var movimento = [];
             for (var j = 0, col; col = row.cells[j]; j++){
@@ -98,7 +118,7 @@ var alacardExtension = {
 
     checkLogin: function(callback){
         var hasCredentials = false;
-        chrome.storage.sync.get('options', function(value){
+        chrome.storage.local.get('options', function(value){
             console.log(value);
             if (value.options && value.options.auth.cardNumber){
                 alacardExtension.options = value.options;
@@ -120,15 +140,24 @@ var alacardExtension = {
     saveCredentials: function(cardNumber, cardPassword, callback){
         alacardExtension.options.auth.cardNumber = cardNumber;
         alacardExtension.options.auth.cardPassword = cardPassword;
-        chrome.storage.sync.set({options: alacardExtension.options});
+        chrome.storage.local.set({options: alacardExtension.options});
         if(callback){
             callback();
         }
     },
 
+    saveToCache: function(){
+        alacardExtension.options.cache.balance = alacardExtension.balance;
+        alacardExtension.options.cache.history = alacardExtension.history;
+        console.log(alacardExtension.history);
+        alacardExtension.options.cache.lastUpdate = new Date().getTime();
+        chrome.storage.local.set({options: alacardExtension.options});
+        console.log('saving to cache');
+    },
+
     logout: function(callback){
         alacardExtension.options.auth = null;
-        chrome.storage.sync.set({options: null});
+        chrome.storage.local.set({options: null});
         alacardExtension.checkLogin();
         if (callback){ callback(); }
     },
@@ -139,34 +168,38 @@ var alacardExtension = {
                 cardNumber: null,
                 cardPassword: null
             },
+            cache: {
+                balance: null,
+                history: null,
+                lastUpdate: 0
+            },
             updateInterval: 60,
-            alertLowBalance: false,
-            lastUpdate: 0
+            alertLowBalance: false
         };
-        chrome.storage.sync.set({options: alacardExtension.options});
+        chrome.storage.local.set({options: alacardExtension.options});
     }
 };
 
 document.addEventListener('DOMContentLoaded', function(){
     document.getElementById("balance_placeholder").innerHTML = 'a carregar';//'<img src="../img/loader.gif" alt="loading"/>';
 
-    var historicBtn = document.getElementById("btn-historico"); 
-    var historicDiv = document.getElementById("historic-content");
+    var historyBtn = document.getElementById("btn-historico"); 
+    var historyDiv = document.getElementById("history-content");
 
     var logoutBtn = document.getElementById("logout");    
     logoutBtn.addEventListener('click', function(){
         alacardExtension.logout(function(){
-            historicDiv.style.display = "none";
+            historyDiv.style.display = "none";
             logoutBtn.style.display = "none";
         });
     });
 
-    historicBtn.addEventListener('click', function(){
-        //only shows historic if alacardExtension is loaded
-        if(historicDiv.style.display == "none" && alacardExtension.history){
-            historicDiv.style.display = "block";
+    historyBtn.addEventListener('click', function(){
+        //only shows history if alacardExtension is loaded
+        if(historyDiv.style.display == "none" && alacardExtension.history){
+            historyDiv.style.display = "block";
         } else{
-            historicDiv.style.display = "none";
+            historyDiv.style.display = "none";
         }
     });
 
@@ -174,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function(){
         var balance = alacardExtension.balance;
         document.getElementById('balance_placeholder').innerHTML = balance ? balance : 'erro';
 
-        var historic = alacardExtension.getHistory();
+        alacardExtension.getHistory();
     }
 
     var loginHandler = function(hasCredentials){

@@ -9,12 +9,14 @@
         "default_popup": "popup.html"
     },
     "icons": {
+        "16": "img/icon16.png",
         "48": "img/icon48.png",
         "128": "img/icon128.png"
     },
     "options_page": "options.html",
     "permissions": [
         "https://www.alacard.pt/*",
-        "storage"
+        "storage",
+        "unlimitedStorage"
     ]
 }

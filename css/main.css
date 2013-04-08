@@ -602,3 +602,7 @@ font-size: .85em;
 	background: transparent url(../img/options.png) 0px -87px no-repeat;
 	display: inline-block;
 }
+
+.loading{
+    margin-left: 25px;
+}

@@ -32,6 +32,13 @@
                 updateInterval.value = options.updateInterval;
             }
 
+            var logoutButton = document.getElementById('logout');
+            logoutButton.addEventListener('click', function(){
+                options.auth.cardNumber = null;
+                options.auth.cardPassword = null;
+                saveOptions(options);
+            });
+
             var saveButton = document.getElementById('save_options_btn');
             saveButton.addEventListener('click', function(){
                 var status = document.getElementById('status');

@@ -8,8 +8,13 @@ var alacardExtension = {
 
     options: {},
 
-    init: function(callback){
-        if (alacardExtension.options.cache.balance){
+    init: function(callback, skipCache){
+
+        // start the loading gif
+        var loadingStr = '<img class="loading" src="../img/loader.gif" alt="loading"/>';
+        document.getElementById("balance_placeholder").innerHTML = loadingStr;
+
+        if (!skipCache && alacardExtension.options.cache.balance){
             var lastUpdate = alacardExtension.options.cache.lastUpdate,
                 updateInterval = (alacardExtension.options.updateInterval * 60) * 1000,
                 currentTime = new Date().getTime();
@@ -145,13 +150,6 @@ var alacardExtension = {
         chrome.storage.local.set({options: alacardExtension.options});
     },
 
-    logout: function(callback){
-        alacardExtension.options.auth = null;
-        chrome.storage.local.set({options: null});
-        alacardExtension.checkLogin();
-        if (callback){ callback(); }
-    },
-
     optionsSetup: function(){
         alacardExtension.options = {
             auth: {
@@ -178,18 +176,14 @@ var alacardExtension = {
 };
 
 document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById("balance_placeholder").innerHTML = '<span style="margin-left: 25px;"><img src="../img/loader.gif" alt="loading"/></span>';
 
+    var refreshButton = document.getElementById('refresh_button');
     var historyBtn = document.getElementById("btn-historico"); 
     var historyDiv = document.getElementById("history-content");
 
-    /*var logoutBtn = document.getElementById("logout");    
-    logoutBtn.addEventListener('click', function(){
-        alacardExtension.logout(function(){
-            historyDiv.style.display = "none";
-            logoutBtn.style.display = "none";
-        });
-    });*/
+    refreshButton.addEventListener('click', function(){
+        alacardExtension.init(initHandler, true);
+    });
 
     historyBtn.addEventListener('click', function(){
         //only shows history if alacardExtension is loaded
@@ -203,7 +197,6 @@ document.addEventListener('DOMContentLoaded', function(){
     var initHandler = function(){
         var balance = alacardExtension.balance;
         document.getElementById('balance_placeholder').innerHTML = balance ? balance : 'erro';
-
         alacardExtension.getHistory();
     }
 

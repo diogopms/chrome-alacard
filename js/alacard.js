@@ -178,7 +178,7 @@ var alacardExtension = {
 };
 
 document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById("balance_placeholder").innerHTML = 'a carregar';//'<img src="../img/loader.gif" alt="loading"/>';
+    document.getElementById("balance_placeholder").innerHTML = '<span style="margin-left: 25px;"><img src="../img/loader.gif" alt="loading"/></span>';
 
     var historyBtn = document.getElementById("btn-historico"); 
     var historyDiv = document.getElementById("history-content");

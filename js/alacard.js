@@ -17,10 +17,15 @@ var alacardExtension = {
             if ((currentTime - lastUpdate) <= updateInterval){
                 alacardExtension.balance = alacardExtension.options.cache.balance;
                 alacardExtension.history = alacardExtension.options.cache.history;
+                var lastUpdatePlaceholder = document.getElementById('last_update');
+                var lastUpdateStr = alacardExtension.dateBuilder(alacardExtension.options.cache.lastUpdate);
+                lastUpdatePlaceholder.innerHTML = lastUpdateStr
                 return callback();
             }
         }
 
+
+        document.getElementById('last_update').innerHTML = alacardExtension.dateBuilder(new Date().getTime());
         var remoteURL = "https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp";
 
         var handleFirstPhase = function(html) {
@@ -162,6 +167,13 @@ var alacardExtension = {
             alertLowBalance: false
         };
         chrome.storage.local.set({options: alacardExtension.options});
+    },
+
+    dateBuilder: function(dat){
+        var lastUpdateDate = new Date(dat);
+        var lastUpdateStr = lastUpdateDate.getDate() + "/" + lastUpdateDate.getMonth();
+        lastUpdateStr += "/" + lastUpdateDate.getFullYear() + " " + lastUpdateDate.getHours() + ":" + lastUpdateDate.getMinutes();
+        return lastUpdateStr;
     }
 };
 
@@ -171,13 +183,13 @@ document.addEventListener('DOMContentLoaded', function(){
     var historyBtn = document.getElementById("btn-historico"); 
     var historyDiv = document.getElementById("history-content");
 
-    var logoutBtn = document.getElementById("logout");    
+    /*var logoutBtn = document.getElementById("logout");    
     logoutBtn.addEventListener('click', function(){
         alacardExtension.logout(function(){
             historyDiv.style.display = "none";
             logoutBtn.style.display = "none";
         });
-    });
+    });*/
 
     historyBtn.addEventListener('click', function(){
         //only shows history if alacardExtension is loaded
@@ -197,10 +209,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     var loginHandler = function(hasCredentials){
         if(hasCredentials){            
-            logoutBtn.style.display = "block"; //hide logout button
             alacardExtension.init(initHandler);
-        } else{
-            logoutBtn.style.display = "none"; //hide logout button
         }
     }
 

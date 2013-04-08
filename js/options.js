@@ -1,7 +1,4 @@
 (function(){
-    chrome.storage.local.getBytesInUse('options', function(data){
-        console.log(data);
-    });
 
     function saveOptions(options){
         chrome.storage.local.set({options: options});
@@ -40,8 +37,9 @@
                 var status = document.getElementById('status');
 
                 if (cardNumber.value.length < 1 || cardPassword.value.length < 1){
-                    status.innerHTML = 'Preencha os dois campos';
+                    status.innerHTML = 'Preencha os dois campos de autenticação';
                     status.style.color = 'red';
+                    status.style.visibility = 'visible';
                     return false;
                 }
                 else{
@@ -50,8 +48,9 @@
                     options.auth.cardPassword = cardPassword.value;
                     options.updateInterval = updateInterval.value;
                     saveOptions(options);
-//                    status.style.color = 'green';
-                    status.innerHTML = 'Dados guardados com sucesso';
+                    status.innerHTML = '<span class="icon"></span>Dados guardados com sucesso';
+                    status.style.color = 'white';
+                    status.style.visibility = 'visible';
                 }
             });
         });

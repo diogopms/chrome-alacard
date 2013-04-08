@@ -46,16 +46,28 @@ var alacardExtension = {
         var all_movimentos = [], coluna;
 
         for (var i = 1, row; row = table.rows[i]; i++){
+            debito = true;
             var movimento = [];
             for (var j = 0, col; col = row.cells[j]; j++){
-                if(j == 0 || j == 3 || j == 4 || j == 6){
-                    coluna = col.innerHTML.replace(/\s+/g, ' ');
+                coluna = col.innerHTML.replace(/\s+/g, ' ');
+                if(j == 2){
+                    if(coluna == ' Carregamento '){
+                        debito = false;
+                    }
+                }
+                if(j == 0 || j == 3 || (j == 4 && debito) || (j == 5 && !debito) || j == 6){
+                    if(j == 5){
+                        coluna = '+'+coluna;
+                    }else if(j == 4){
+                        coluna = '-'+coluna;
+                    }
                     movimento.push(coluna)
                 }
             }
             all_movimentos.push(movimento);
         }
 
+        //remove last row, containing pagination elements
         all_movimentos.pop();
 
         var html = '';
@@ -68,7 +80,6 @@ var alacardExtension = {
                     '</tr>';
         }
         document.getElementById('thistorico').innerHTML = html;
-        //console.log(all_movimentos);
     },
 
     sendRequest: function(method, url, callback){
@@ -115,7 +126,7 @@ var alacardExtension = {
         }
     },
 
-    logout: function(cardNumber, password, callback){
+    logout: function(callback){
         alacardExtension.options = null;
         chrome.storage.sync.set({options: null});
         alacardExtension.checkLogin();
@@ -142,13 +153,16 @@ document.addEventListener('DOMContentLoaded', function(){
     logoutBtn.addEventListener('click', function(){
         alacardExtension.logout(function(){
             logoutBtn.style.display = "none";
+            historicDiv.style.display = "none";
         });
     });
 
     var historicBtn = document.getElementById("btn-historico"); 
     var historicDiv = document.getElementById("historic-content");
     historicBtn.addEventListener('click', function(){
-        if(historicDiv.style.display == "none"){
+
+        //only shows historic if alacardExtension is loaded
+        if(historicDiv.style.display == "none" && alacardExtension.dom){
             historicDiv.style.display = "block";
         }else{
             historicDiv.style.display = "none";
@@ -167,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function(){
             logoutBtn.style.display = "block"; //hide logout button
             alacardExtension.init(initHandler);
         }else{
-            logoutBtn.style.display = "none"; //show logout button
+            logoutBtn.style.display = "none"; //hide logout button
         }
     }
 

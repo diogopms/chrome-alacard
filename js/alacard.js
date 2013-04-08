@@ -17,44 +17,39 @@ var alacardExtension = {
             if ((currentTime - lastUpdate) <= updateInterval){
                 alacardExtension.balance = alacardExtension.options.cache.balance;
                 alacardExtension.history = alacardExtension.options.cache.history;
+                var lastUpdatePlaceholder = document.getElementById('last_update');
+                var lastUpdateStr = alacardExtension.dateBuilder(alacardExtension.options.cache.lastUpdate);
+                lastUpdatePlaceholder.innerHTML = lastUpdateStr
                 return callback();
             }
         }
 
+
+        document.getElementById('last_update').innerHTML = alacardExtension.dateBuilder(new Date().getTime());
         var remoteURL = "https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp";
 
-        var handleFirstPhase = function(request) {
-            if(request){
-                var html = request.responseText;
-                var doc = document.createElement("html");
-                doc.innerHTML = html;
-                var key = doc.getElementsByTagName("input")[1].value;
-                var action = doc.getElementsByTagName("form")[0].getAttribute('action');
+        var handleFirstPhase = function(html) {
+            var doc = document.createElement("html");
+            doc.innerHTML = html;
+            var key = doc.getElementsByTagName("input")[1].value;
+            var action = doc.getElementsByTagName("form")[0].getAttribute('action');
 
-                remoteURL = 'https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.auth.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.auth.cardPassword+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
-                alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
-            }
-            else{
-               console.log("Erro no servidor!");
-            }
+            remoteURL = 'https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.auth.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.auth.cardPassword+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
+            alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
         };
 
-        var handleSecondPhase = function(request){
-            if(request){
-                var tmpDoc = document.createElement('html');
-                tmpDoc.innerHTML = request.responseText;
-                var balanceElem = tmpDoc.getElementsByClassName('currencyAmountBold');
-                alacardExtension.balance = balanceElem.length > 0 ? balanceElem[0].innerHTML : null;
-                var table = tmpDoc.getElementsByTagName('table')[8];
-                alacardExtension.history = table.innerHTML;
+        var handleSecondPhase = function(html){
+            var tmpDoc = document.createElement('html');
+            tmpDoc.innerHTML = html;
+            var balanceElem = tmpDoc.getElementsByClassName('currencyAmountBold');
+            alacardExtension.balance = balanceElem.length > 0 ? balanceElem[0].innerHTML : null;
+            var table = tmpDoc.getElementsByTagName('table')[8];
+            alacardExtension.history = table.innerHTML;
 
-                // cache it!
-                alacardExtension.saveToCache();
-                tmpDoc = undefined;
-                callback();
-            } else {
-                console.log('erro');
-            }
+            // cache it!
+            alacardExtension.saveToCache();
+            tmpDoc = undefined;
+            callback();
         };
         alacardExtension.sendRequest('GET', remoteURL, handleFirstPhase);
     },
@@ -103,23 +98,20 @@ var alacardExtension = {
     },
 
     sendRequest: function(method, url, callback){
-        var request = new XMLHttpRequest();
-        request.open(method, url, true);
+        var xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
 
-        request.onreadystatechange = function(){
-            if (request.status == 200){
-                callback(request);
-            } else{
-                callback(false);
+        xhr.onreadystatechange = function(){
+            if (this.readyState === 4 && this.status === 200){
+                callback(xhr.responseText);
             }
         }
-        request.send();        
+        xhr.send();        
     },
 
     checkLogin: function(callback){
         var hasCredentials = false;
         chrome.storage.local.get('options', function(value){
-            console.log(value);
             if (value.options && value.options.auth.cardNumber){
                 alacardExtension.options = value.options;
                 document.getElementById('logged-content').style.display = "block";
@@ -149,10 +141,8 @@ var alacardExtension = {
     saveToCache: function(){
         alacardExtension.options.cache.balance = alacardExtension.balance;
         alacardExtension.options.cache.history = alacardExtension.history;
-        console.log(alacardExtension.history);
         alacardExtension.options.cache.lastUpdate = new Date().getTime();
         chrome.storage.local.set({options: alacardExtension.options});
-        console.log('saving to cache');
     },
 
     logout: function(callback){
@@ -177,6 +167,13 @@ var alacardExtension = {
             alertLowBalance: false
         };
         chrome.storage.local.set({options: alacardExtension.options});
+    },
+
+    dateBuilder: function(dat){
+        var lastUpdateDate = new Date(dat);
+        var lastUpdateStr = lastUpdateDate.getDate() + "/" + lastUpdateDate.getMonth();
+        lastUpdateStr += "/" + lastUpdateDate.getFullYear() + " " + lastUpdateDate.getHours() + ":" + lastUpdateDate.getMinutes();
+        return lastUpdateStr;
     }
 };
 
@@ -186,13 +183,13 @@ document.addEventListener('DOMContentLoaded', function(){
     var historyBtn = document.getElementById("btn-historico"); 
     var historyDiv = document.getElementById("history-content");
 
-    var logoutBtn = document.getElementById("logout");    
+    /*var logoutBtn = document.getElementById("logout");    
     logoutBtn.addEventListener('click', function(){
         alacardExtension.logout(function(){
             historyDiv.style.display = "none";
             logoutBtn.style.display = "none";
         });
-    });
+    });*/
 
     historyBtn.addEventListener('click', function(){
         //only shows history if alacardExtension is loaded
@@ -212,10 +209,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     var loginHandler = function(hasCredentials){
         if(hasCredentials){            
-            logoutBtn.style.display = "block"; //hide logout button
             alacardExtension.init(initHandler);
-        } else{
-            logoutBtn.style.display = "none"; //hide logout button
         }
     }
 

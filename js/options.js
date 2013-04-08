@@ -50,7 +50,7 @@
                     options.auth.cardPassword = cardPassword.value;
                     options.updateInterval = updateInterval.value;
                     saveOptions(options);
-                    status.style.color = 'green';
+//                    status.style.color = 'green';
                     status.innerHTML = 'Dados guardados com sucesso';
                 }
             });

@@ -1,2 +1,2 @@
 #!/bin/bash
-zip -r build/alacard-chrome-$1.zip manifest.json popup.html js/ img/ -x .DS_Store .gitignore \*/.DS_Store
+zip -r build/chrome-alacard-$1.zip manifest.json popup.html options.html js/ img/ css/ -x .DS_Store .gitignore \*/.DS_Store

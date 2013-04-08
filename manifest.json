@@ -16,7 +16,6 @@
     "options_page": "options.html",
     "permissions": [
         "https://www.alacard.pt/*",
-        "storage",
-        "unlimitedStorage"
+        "storage"
     ]
 }

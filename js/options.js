@@ -21,10 +21,15 @@
         getOptions(function(options){
             var cardNumber = document.getElementById('card_number');
             var cardPassword = document.getElementById('card_password');
+            var updateInterval = document.getElementById('update_interval');
 
             if (options.auth.cardNumber && options.auth.cardPassword){
                 cardNumber.value = options.auth.cardNumber;
                 cardPassword.value = options.auth.cardPassword;
+            }
+
+            if (options.updateInterval){
+                updateInterval.value = options.updateInterval;
             }
 
             var saveButton = document.getElementById('save_options_btn');

@@ -9,7 +9,7 @@
 
     <body>
         <div id="container">
-            <a href="#" class="btn-logout" id="logout" ><span>Logout</span></a>
+            <a href="/options.html" target="_blank" class="btn-options" id="options" >Opções<span></span></a>
             <div class="logo">A La Card</div>
             <div id="notlogged-content" style="display: none;">
                 <div class="holder-colors reset-top">
@@ -44,9 +44,24 @@
                     <div class="line-orange"></div>
                     <div class="line-green"></div>
                 </div>
-                <a href="#" class="btn-historico"><span>Histórico</span></a>
+                <a href="#" id="btn-historico" class="btn-historico"><span>Histórico</span></a>
                 <div class="info">
                 <p>Saldo Actual:<span id="balance_placeholder"></span></p>
+                <div class="div-historico" style="display: none;" id="history-content">
+                    <table class="table-historico" >
+                        <thead>
+                            <tr class="header">
+                                <td>Data</td>
+                                <td>Descrição</td>
+                                <td>Valor</td>
+                                <td>Controlo</td>
+                            </tr>
+                        </thead>
+                        <tbody id="thistorico">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="actual">Última actualização em <span id="last_update"></span><a id="refresh_button" href="#"></a></div>
                 </div>
             </div>
         </div>

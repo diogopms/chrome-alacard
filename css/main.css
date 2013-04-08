@@ -1,7 +1,16 @@
+/* 
+    Document   : style
+    Created on : Apr 7, 2013
+    Author     : Pedro Borges
+    URL        : https://github.com/pfdborges
+    Description:
+        Styling for the Alacard Chrome Extension
+*/
+
+/* page popup */
 body {
     width: 288px;
     background-color: #fff;
-/*    background: #fff url(../img/mira-alacard.png) no-repeat 0 0;*/
     font-size: 14px;
     padding: 10px;
     font-family: 'Dosis', sans-serif;
@@ -19,7 +28,6 @@ body {
 a{
 	color: #9d6a4a;
 	text-decoration: none;
-	
 	-webkit-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	   -moz-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	    -ms-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -30,6 +38,14 @@ a:hover{
 	color: #212121;
 	text-decoration: none;
 }
+a:focus { 
+    outline: none; 
+}
+
+button:focus { 
+    outline: none; 
+}
+
 p{
 	font-family: 'Dosis', sans-serif;
 	font-weight: 400;
@@ -118,17 +134,49 @@ p{
 
 a.btn-logout{
 	float: right;
-	font-size: 1em;
+	font-size: .9em;
 	font-weight: 400;
-	padding-right: 5px;
+	padding-right: 10px;
 	padding-top: 5px;
+	color: white;
 }
+a.btn-logout:hover{
+	color: #e41432;
+}
+
+a.btn-options{
+	float: right;
+	font-size: .9em;
+	font-weight: 400;
+	padding-right: 10px;
+	padding-top: 5px;
+	color: #b5d1a0;
+	cursor: pointer;
+}
+a.btn-options:hover{
+	color: #014a1c;
+}
+a.btn-options span{
+	float: right;
+	height: 21px;
+	width: 21px;
+	background: transparent url(../img/options.png) 0px 0px no-repeat;
+	cursor: pointer;
+	margin: 0px 4px 0 3px;
+}
+a.btn-options span:hover{
+	background: transparent url(../img/options.png) 0px -20px no-repeat;
+}
+
+a.btn-options:hover span{
+	background: transparent url(../img/options.png) 0px -20px no-repeat;
+}
+
 a.btn-historico{
 width: 41px;
 height: 41px;
 -webkit-border-radius: 50px;
 border-radius: 50px;
-/*text-indent: -99999em;*/
 float: left;
 position: relative;
 top: -39px;
@@ -193,6 +241,31 @@ font-weight: 400;
 	font-weight: 400;
 	padding-left: 35px;
 }
+
+.info .actual{
+	background-color: #78a459;
+	padding: 5px 0 5px 22px;
+	color: #fff;
+	text-align: left;
+	font-size: .8em;
+	font-weight: 500;
+	margin-top: -5px;
+}
+
+.info .actual a{
+	height: 18px;
+	width: 22px;
+	background: transparent url(../img/options.png) 0px -119px no-repeat;
+	display: inline-block;
+	position: relative;
+	top: 2px;
+	left: 5px;
+}
+.info .actual a:hover {
+background: transparent url(../img/options.png) 0px -140px no-repeat;
+}
+
+
 .login-form, fieldset{
 	border: none;
 	color: #fff;
@@ -212,9 +285,9 @@ fieldset{
 	margin-top: -2px;
 }
 .login-form input{
-font-family: 'Dosis', sans-serif;
-font-weight: 400;
-font-size: .85em;
+	font-family: 'Dosis', sans-serif;
+	font-weight: 400;
+	font-size: .85em;
 	float: left;
 	width: 146px;
 	height: 30px;
@@ -243,7 +316,6 @@ input::-webkit-input-placeholder  {
 	margin: 0;
 	font-size: .9em;
 	letter-spacing: 1px;
-	
 	-webkit-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	   -moz-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 	    -ms-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -252,4 +324,285 @@ input::-webkit-input-placeholder  {
 }
 .login-form input[type="submit"]:hover{
 	background: #e41432;
+}
+
+#update_interval{
+    width: 35px;
+    margin-right: 13px;
+}
+
+.col-yellow{
+	width: 25%;
+}
+
+.col-red{
+	width: 25%;
+	font-size: 85%;
+}
+.col-orange{
+	width: 25%;
+
+}
+.col-green{
+	width: 25%;
+
+}
+.table-historico{
+	padding-top: 5px;
+	margin-left: -2px;
+	text-align: center;
+	line-height: 1em;
+	font-size: 14px;
+	margin-top: 0px;
+	border-collapse: collapse;
+	font-weight: 400;
+	color: #3f7847;
+}
+
+.table-historico tr.header td{
+	color: #fff;
+	font-weight: 500;
+	height: 20px;
+	border-spacing: 0px;
+	vertical-align: middle;
+	padding: 16px 0 8px 0;
+}
+.table-historico tr.header {
+	background-color: #78a459;
+}
+
+.table-historico thead{
+	background: #b5d1a0;
+	border-spacing: 1px;
+}
+.title-table-historico{
+	*margin-top: 48px;
+	*margin-left: 7px;
+}
+.div-historico{
+	background: #b5d1a0;
+}
+
+.table-historico tbody > tr{
+	background-color: #c7ddb1;
+	height: 50px;
+}
+
+.table-historico tbody > tr > td{
+	border-right: 1px solid #b5d1a0;
+}
+
+.table-historico tbody > tr > td:last-child{
+	border-right: none;
+}
+
+.table-historico tbody > tr:nth-child(odd) > td,
+.table-historico tbody > tr:nth-child(odd) > th {
+  background-color: #d3e4c2;
+}
+/* // page popup */
+
+/* page options */
+
+body.options {
+    width: 100%;
+    background-color: #b5d1a0;
+    font-size: 14px;
+    padding: 10px;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 200;
+    color: #014a1c;
+    -webkit-font-smoothing: antialiased;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 0;
+    margin: 0;
+}
+
+.options .wrapper{
+	width: 960px;
+	margin: 0 auto;
+}
+.options #container-header{
+	width: 100%;
+	background-color: #fff;
+	height: 202px;
+}
+.options #container{
+	width: 100%;
+	background-color: #b5d1a0;
+	margin-top: 76px;
+}
+.holder-colors-big{
+	width: 100%;
+	height: 4px;
+	float: left;
+	overflow: hidden;
+}
+.holder-colors-big .line-yellow{
+	width: 5%;
+	height: 4px;
+	float: left;
+	background: #f9da23;
+}
+.holder-colors-big .line-red{
+	width: 5%;
+	height: 4px;
+	float: left;
+	background: #e41432;
+}
+.holder-colors-big .line-orange{
+	width: 5%;
+	height: 4px;
+	float: left;
+	background: #f19823;
+}
+.holder-colors-big .line-green{
+	width: 5%;
+	height: 4px;
+	float: left;
+	background: #78a459;
+}
+.holder-options-logo{
+	float: left;
+	position: relative;
+}
+.holder-options-logo h2{
+	float: left;
+	position: relative;
+	left: 102px;
+	top: 10px;
+	font-weight: 500;
+}
+.clip-options-logo{
+	background: transparent url(../img/icon-options.png) no-repeat 0 0;
+	height: 54px;
+	width: 54px;
+	float: left;
+	position: relative;
+	left: 57px;
+	top: 50px;
+}
+
+.auth{
+	margin-left: 160px;
+	width: 550px;
+	margin-top: -27px;
+	position: relative;
+}
+.auth h3{
+	margin-left: 0;
+}
+
+.auth h3 span{
+	margin: 20px 0 15px 0;
+    float: left;
+    width: 100%;
+}
+.auth label{
+	float: left;
+	width: 30%;
+	display: block;
+}
+.auth label.min{
+	float: left;
+	width: auto;
+	display: block;
+}
+.auth input{
+font-family: 'Dosis', sans-serif;
+font-weight: 400;
+font-size: .85em;
+	float: left;
+	width: 250px;
+	height: 30px;
+	border: none;
+	color: #014a1c;
+	margin-bottom: 10px;
+	padding: 0 10px;
+}
+
+.auth input[type="checkbox"]{
+	visibility: hidden;
+}
+
+.auth input[type="checkbox"] + label {
+    display:block;
+    width:30px;
+    height:30px;
+	position: absolute;
+	top: 187px;
+	left: 226px;
+    vertical-align:middle;
+    background: transparent url(../img/checkboxes-alacard.png) -3px -2px no-repeat;
+    cursor:pointer;
+}
+
+.auth input[type="checkbox"]:hover + label {
+    background: transparent url(../img/checkboxes-alacard.png) -80px -2px no-repeat;
+}
+
+.auth input[type="checkbox"]:checked + label {
+    background: transparent url(../img/checkboxes-alacard.png) -41px -2px no-repeat;
+}
+
+.auth input[type="submit"]{
+	float: left;
+	width: 20%;
+	border: none;
+	background: #78a459;
+	color: #fff;
+	cursor: pointer;
+	font-family: 'Dosis', sans-serif;
+	font-weight: 400;
+	padding: 5px 0;
+	margin: -15px 165px;
+	font-size: .9em;
+	letter-spacing: 1px;
+	
+	-webkit-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	   -moz-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	    -ms-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	     -o-transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	        transition: all 200ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+.auth input[type="submit"]:hover{
+	background: #e41432;
+}
+.auth label{
+	margin-top: 3px;
+	font-weight: 400;
+}
+.auth label.alert{
+	margin-top: 8px;
+}
+.legend{
+	color: #fff;
+	float: left;
+	font-size: .85em;
+	clear: left;
+	margin-top: -14px;
+	font-weight: 400;
+	width: 156px;
+}
+#status{
+	color: #fff;
+	background-color: #78a459;
+	position: relative;
+	float: left;
+	padding: 4px 9px;
+	margin: 0px 15px;
+    visibility: hidden;
+}
+#status span.icon{
+	height: 18px;
+	width: 29px;
+	background: transparent url(../img/options.png) 0px -87px no-repeat;
+	display: inline-block;
+}
+
+.loading{
+    margin-left: 25px;
 }

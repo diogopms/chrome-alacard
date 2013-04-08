@@ -6,24 +6,73 @@
     <link href="css/main.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Dosis:200,400,500' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class="options">
+	<div id="container-header">
+	<div class="wrapper">
+		<div class="logo">A La Card</div>
+		
+		<div class="holder-options-logo">
+		
+		<div class="clip-options-logo"></div>
+		<h2>Opções</h2>
+		
+		</div>
+				
+	</div>
+	</div>
+	
+	<div class="holder-colors-big">
+	    <div class="line-yellow"></div>
+	    <div class="line-red"></div>
+	    <div class="line-orange"></div>
+	    <div class="line-green"></div>
+	    <div class="line-yellow"></div>
+	    <div class="line-red"></div>
+	    <div class="line-orange"></div>
+	    <div class="line-green"></div>
+	    <div class="line-yellow"></div>
+	    <div class="line-red"></div>
+	    <div class="line-orange"></div>
+	    <div class="line-green"></div>
+	    <div class="line-yellow"></div>
+	    <div class="line-red"></div>
+	    <div class="line-orange"></div>
+	    <div class="line-green"></div>
+	    <div class="line-yellow"></div>
+	    <div class="line-red"></div>
+	    <div class="line-orange"></div>
+	    <div class="line-green"></div>
+	</div>
+	
+	
     <div id="container">
-        <h2>Opções</h2>
+    
+    <div class="wrapper">
+    
+    <div class="auth">
         <h3>Autenticação</h3>
-        <p id="status"></p>
+        <p><a href="#" class="btn-logout" id="logout" ><span>Logout</span></a></p>
         <label>Número de Cartão</label>
-        <input type="text" id="card_number" name="card_number" placeholder="Número de cartão">
+        <input type="text" id="card_number" name="card_number" placeholder="Insira o nr. do seu cartão à la card...">
         <label>Password</label>
-        <input type="password" id="card_password" name="card_password" placeholder="Password">
+        <input type="password" id="card_password" name="card_password" placeholder="Insira a sua password...">
         <br>
-        <label>Alert balance < 5€</label>
-        <input type="checkbox" name="alert_balance">
+        <h3><span>Actualização</span></h3>
+        <!--<label class="alert">Alertar se balanço < 5€</label>
+        <input type="checkbox" value="none" name="alert_balance" id="alacard-checkbox">
+        <label class="checkalacard" for="alacard-checkbox"></label>-->
         <br>
-        <label>Update balance every x hours?</label>
-        <input type="text" name="seconds">
-        <br>
-        <input type="button" id="save_options_btn" value="Guardar">
+        <label>Intervalo de Actualização</label>
+        <input type="text" name="update_interval" id="update_interval" placeholder="Indique o nr. de horas para actualização...">
+        <label class="min">minutos</label>
+        <br />
+        <p id="status"></p>
+ 		<p class="legend">Para actualizar sempre o saldo, inserir 0</p>
+        <input type="submit" class="btn-entrar" id="save_options_btn" value="Guardar">
+    </div> <!-- // auth -->
     </div>
+    
+    </div><!-- // wrapper-->
     <script type="text/javascript" src="js/options.js"></script>
 </body>
 </html>

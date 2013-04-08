@@ -22,20 +22,24 @@
             var cardNumber = document.getElementById('card_number');
             var cardPassword = document.getElementById('card_password');
             var updateInterval = document.getElementById('update_interval');
+            var logoutButton = document.getElementById('logout');
 
             if (options.auth.cardNumber && options.auth.cardPassword){
                 cardNumber.value = options.auth.cardNumber;
                 cardPassword.value = options.auth.cardPassword;
+                logoutButton.style.display = 'block';
             }
 
             if (options.updateInterval){
                 updateInterval.value = options.updateInterval;
             }
 
-            var logoutButton = document.getElementById('logout');
             logoutButton.addEventListener('click', function(){
                 options.auth.cardNumber = null;
                 options.auth.cardPassword = null;
+                cardNumber.value = '';
+                cardPassword.value = '';
+                logoutButton.style.display = 'none';
                 saveOptions(options);
             });
 

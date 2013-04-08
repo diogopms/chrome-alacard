@@ -1,11 +1,14 @@
 (function(){
+    chrome.storage.local.getBytesInUse('options', function(data){
+        console.log(data);
+    });
 
     function saveOptions(options){
-        chrome.storage.sync.set({options: options});
+        chrome.storage.local.set({options: options});
     }
 
     function getOptions(callback){
-        chrome.storage.sync.get('options', function(value){
+        chrome.storage.local.get('options', function(value){
             if (!value.options){
                 value = { auth: {} };
                 saveOptions(value);
@@ -45,6 +48,7 @@
                     // save auth data
                     options.auth.cardNumber = cardNumber.value;
                     options.auth.cardPassword = cardPassword.value;
+                    options.updateInterval = updateInterval.value;
                     saveOptions(options);
                     status.style.color = 'green';
                     status.innerHTML = 'Dados guardados com sucesso';

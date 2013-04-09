@@ -62,6 +62,7 @@
                     status.innerHTML = '<span class="icon"></span>Dados guardados com sucesso';
                     status.style.color = 'white';
                     status.style.visibility = 'visible';
+                    logoutButton.style.display = 'block';
                 }
             });
         });

@@ -15,7 +15,7 @@ This extension is available in the Chrome Webstore:
 This extension was developed by:
 
 - [Diogo Serrano][1] (code)
-- Pedro Borges[2] (design)
+- [Pedro Borges][2] (design)
 - [Rogério Vicente][3] (code)
 - [Tiago Antunes][4] (code)
 

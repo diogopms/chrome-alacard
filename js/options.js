@@ -49,7 +49,7 @@
 
                 if (cardNumber.value.length < 1 || cardPassword.value.length < 1){
                     status.innerHTML = 'Preencha os dois campos de autenticação';
-                    status.style.color = 'red';
+                    status.className = 'error';
                     status.style.visibility = 'visible';
                     return false;
                 }
@@ -60,8 +60,8 @@
                     options.updateInterval = updateInterval.value;
                     saveOptions(options);
                     status.innerHTML = '<span class="icon"></span>Dados guardados com sucesso';
-                    status.style.color = 'white';
                     status.style.visibility = 'visible';
+                    status.className = 'ok';
                     logoutButton.style.display = 'block';
                 }
             });

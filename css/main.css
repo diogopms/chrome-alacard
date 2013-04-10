@@ -606,6 +606,7 @@ font-size: .85em;
     visibility: hidden;
     width: 420px;
     margin-left: 160px;
+    text-align: center;
 }
 .ok{
 	background-color: #78a459;

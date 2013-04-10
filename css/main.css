@@ -132,6 +132,10 @@ p{
 	margin: 0 -25px;
 }
 
+#logout{
+    display: none;
+}
+
 .logout-area{
 	float: left;
 	clear: left;
@@ -597,13 +601,11 @@ font-size: .85em;
 }
 #status{
 	color: #fff;
-	position: relative;
-	float: left;
 	padding: 4px 9px;
 	margin: 0px 15px;
     visibility: hidden;
-    top: 21px;
-    left: -83px;
+    width: 420px;
+    margin-left: 160px;
 }
 .ok{
 	background-color: #78a459;

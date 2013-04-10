@@ -49,13 +49,16 @@
     
     <div class="wrapper">
     
+    <p id="status"></p>
+    <br>
     <div class="auth">
         <h3>Autenticação</h3>
-        <p><a href="#" class="btn-logout" id="logout" ><span>Logout</span></a></p>
         <label>Número de Cartão</label>
         <input type="text" id="card_number" name="card_number" placeholder="Insira o nr. do seu cartão à la card...">
         <label>Password</label>
         <input type="password" id="card_password" name="card_password" placeholder="Insira a sua password...">
+        <br>
+        <p class="logout-area"><a href="#" class="btn-logout" id="logout" ><span>Logout</span></a></p>
         <br>
         <h3><span>Actualização</span></h3>
         <!--<label class="alert">Alertar se balanço < 5€</label>
@@ -66,8 +69,7 @@
         <input type="text" name="update_interval" id="update_interval" placeholder="Indique o nr. de horas para actualização...">
         <label class="min">minutos</label>
         <br />
-        <p id="status"></p>
- 		<p class="legend">Para actualizar sempre o saldo, inserir 0</p>
+ 		<p class="legend">(Para actualizar sempre o saldo, inserir 0)</p>
         <input type="submit" class="btn-entrar" id="save_options_btn" value="Guardar">
     </div> <!-- // auth -->
     </div>

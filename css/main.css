@@ -132,16 +132,27 @@ p{
 	margin: 0 -25px;
 }
 
+#logout{
+    display: none;
+}
+
+.logout-area{
+	float: left;
+	clear: left;
+	margin: 0 0 0 165px;
+}
+
 a.btn-logout{
 	float: right;
-	font-size: .9em;
-	font-weight: 400;
-	padding-right: 10px;
-	padding-top: 5px;
+	font-size: .95em;
+	font-weight: 500;
 	color: white;
+	background-color: #e41432;
+	padding: 4px 10px;
 }
 a.btn-logout:hover{
 	color: #e41432;
+	background-color: #fff;
 }
 
 a.btn-options{
@@ -381,6 +392,7 @@ input::-webkit-input-placeholder  {
 }
 .div-historico{
 	background: #b5d1a0;
+	margin-bottom: 5px;
 }
 
 .table-historico tbody > tr{
@@ -558,7 +570,7 @@ font-size: .85em;
 	font-family: 'Dosis', sans-serif;
 	font-weight: 400;
 	padding: 5px 0;
-	margin: -15px 165px;
+	margin: 2px 165px;
 	font-size: .9em;
 	letter-spacing: 1px;
 	
@@ -579,7 +591,7 @@ font-size: .85em;
 	margin-top: 8px;
 }
 .legend{
-	color: #fff;
+	color: #014a1c;
 	float: left;
 	font-size: .85em;
 	clear: left;
@@ -589,20 +601,21 @@ font-size: .85em;
 }
 #status{
 	color: #fff;
-	background-color: #78a459;
-	position: relative;
-	float: left;
 	padding: 4px 9px;
 	margin: 0px 15px;
     visibility: hidden;
+    width: 420px;
+    margin-left: 160px;
+    text-align: center;
 }
-#status span.icon{
-	height: 18px;
-	width: 29px;
-	background: transparent url(../img/options.png) 0px -87px no-repeat;
-	display: inline-block;
+.ok{
+	background-color: #78a459;
+}
+.error{
+	background-color: #e41432;
 }
 
 .loading{
-    margin-left: 25px;
+    margin-left: 40px;
+    margin-top: -10px;
 }

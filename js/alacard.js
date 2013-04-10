@@ -169,8 +169,15 @@ var alacardExtension = {
 
     dateBuilder: function(dat){
         var lastUpdateDate = new Date(dat);
-        var lastUpdateStr = lastUpdateDate.getDate() + "/" + lastUpdateDate.getMonth();
-        lastUpdateStr += "/" + lastUpdateDate.getFullYear() + " " + lastUpdateDate.getHours() + ":" + lastUpdateDate.getMinutes();
+        var day = lastUpdateDate.getDate(),
+            month = lastUpdateDate.getMonth(),
+            year = lastUpdateDate.getFullYear(),
+            hour = lastUpdateDate.getHours(),
+            minutes = lastUpdateDate.getMinutes();
+
+        var lastUpdateStr = (day < 10 ? '0' + day : day) + "/" + (month < 10 ? '0' + month : month);
+        lastUpdateStr += "/" + year + " " + (hour < 10 ? '0' + hour : hour) + ":";
+        lastUpdateStr += (minutes < 10 ? '0' + minutes : minutes);
         return lastUpdateStr;
     }
 };

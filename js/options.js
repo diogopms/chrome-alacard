@@ -68,7 +68,13 @@
                 saveOptions(options);
             });
 
-            var saveButton = document.getElementById('save_options_btn');
+            var saveButton = document.getElementById('save_options_btn'),
+                closeButton = document.getElementById('close_options_btn');
+
+            closeButton.addEventListener('click', function(){
+                window.close();
+            });
+
             saveButton.addEventListener('click', function(){
                 var status = document.getElementById('status');
 

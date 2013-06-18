@@ -15,7 +15,7 @@
     },
     "options_page": "options.html",
     "permissions": [
-        "https://www.alacard.pt/*",
+        "https://www.euroticket-alacard.pt/*",
         "storage"
     ]
 }

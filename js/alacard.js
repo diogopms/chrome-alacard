@@ -54,7 +54,7 @@ var alacardExtension = {
 
 
         document.getElementById('last_update').innerHTML = alacardExtension.dateBuilder(new Date().getTime());
-        var remoteURL = "https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp";
+        var remoteURL = "https://www.euroticket-alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp";
 
         var handleFirstPhase = function(html) {
             var doc = document.createElement("html");
@@ -62,7 +62,7 @@ var alacardExtension = {
             var key = doc.getElementsByTagName("input")[1].value;
             var action = doc.getElementsByTagName("form")[0].getAttribute('action');
 
-            remoteURL = 'https://www.alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.auth.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.auth.cardPassword+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
+            remoteURL = 'https://www.euroticket-alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.auth.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.auth.cardPassword+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
             alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
         };
 

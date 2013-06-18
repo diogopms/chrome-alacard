@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name":  "alacard",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Consulte o saldo e movimentos do seu cartão BES a la card no browser",
     "browser_action": {
         "default_icon": "img/icon128.png",

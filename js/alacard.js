@@ -27,6 +27,8 @@ var alacardExtension = {
 
     balance: null,
 
+    service: 'alacard',
+
     history: null,
 
     options: {},
@@ -54,7 +56,7 @@ var alacardExtension = {
 
 
         document.getElementById('last_update').innerHTML = alacardExtension.dateBuilder(new Date().getTime());
-        var remoteURL = "https://www.euroticket-alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp";
+        var remoteURL = "https://www."+alacardExtension.service+".pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp";
 
         var handleFirstPhase = function(html) {
             var doc = document.createElement("html");
@@ -62,7 +64,7 @@ var alacardExtension = {
             var key = doc.getElementsByTagName("input")[1].value;
             var action = doc.getElementsByTagName("form")[0].getAttribute('action');
 
-            remoteURL = 'https://www.euroticket-alacard.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.auth.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.auth.cardPassword+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
+            remoteURL = 'https://www.'+alacardExtension.service+'.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.auth.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.auth.cardPassword+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
             alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
         };
 
@@ -71,7 +73,13 @@ var alacardExtension = {
             tmpDoc.innerHTML = html;
             var balanceElem = tmpDoc.getElementsByClassName('currencyAmountBold');
             alacardExtension.balance = balanceElem.length > 0 ? balanceElem[0].innerHTML : null;
-            var table = tmpDoc.getElementsByTagName('table')[8];
+            var table;
+            if(alacardExtension.service == 'euroticket-alacard'){
+                table = tmpDoc.getElementsByClassName('columntitle')[0];
+            }else{
+                table = tmpDoc.getElementsByTagName('table')[8];
+            }
+
             alacardExtension.history = table.innerHTML;
 
             // cache it!
@@ -85,12 +93,12 @@ var alacardExtension = {
     getHistory: function (){
         var table = document.createElement('table');
         table.innerHTML = alacardExtension.history;
-        var all_movimentos = [], coluna, debito;
-
+        var allTransactions = [], coluna, debito;
+console.log(table);
         var rows = table.getElementsByTagName('tr');
         for (var i = 1, row; row = rows[i]; i++){
             debito = true;
-            var movimento = [];
+            var transaction = [];
             for (var j = 0, col; col = row.cells[j]; j++){
                 coluna = col.innerHTML.replace(/\s+/g, ' ');
                 if(j == 2){
@@ -104,22 +112,22 @@ var alacardExtension = {
                     }else if(j == 4){
                         coluna = '-'+coluna;
                     }
-                    movimento.push(coluna)
+                    transaction.push(coluna)
                 }
             }
-            all_movimentos.push(movimento);
+            allTransactions.push(transaction);
         }
 
         //remove last row, containing pagination elements
-        all_movimentos.pop();
+        allTransactions.pop();
 
         var html = '';
-        for(var i=0, mlength = all_movimentos.length; i<mlength; i++){
+        for(var i=0, mlength = allTransactions.length; i<mlength; i++){
             html += '<tr>'+
-                        '<td class="col-yellow">'+all_movimentos[i][0]+'</td>'+
-                        '<td class="col-red">'+all_movimentos[i][1]+'</td>'+
-                        '<td class="col-orange">'+all_movimentos[i][2]+'</td>'+
-                        '<td class="col-green">'+all_movimentos[i][3]+'</td>'+
+                        '<td class="col-yellow">'+allTransactions[i][0]+'</td>'+
+                        '<td class="col-red">'+allTransactions[i][1]+'</td>'+
+                        '<td class="col-orange">'+allTransactions[i][2]+'</td>'+
+                        '<td class="col-green">'+allTransactions[i][3]+'</td>'+
                     '</tr>';
         }
         document.getElementById('thistorico').innerHTML = html;
@@ -227,7 +235,15 @@ document.addEventListener('DOMContentLoaded', function(){
     var initHandler = function(){
         var balance = alacardExtension.balance;
         document.getElementById('balance_placeholder').innerHTML = balance ? balance : 'erro';
-        alacardExtension.getHistory();
+
+        if(!balance && alacardExtension.service != 'euroticket-alacard'){
+            alacardExtension.service = 'euroticket-alacard';
+            alacardExtension.init(initHandler, true);
+        }
+
+        if(balance){
+            alacardExtension.getHistory();
+        }
     }
 
     var loginHandler = function(hasCredentials){

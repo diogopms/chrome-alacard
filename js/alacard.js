@@ -94,18 +94,20 @@ var alacardExtension = {
         var table = document.createElement('table');
         table.innerHTML = alacardExtension.history;
         var allTransactions = [], coluna, debito;
-console.log(table);
+
         var rows = table.getElementsByTagName('tr');
         for (var i = 1, row; row = rows[i]; i++){
             debito = true;
             var transaction = [];
             for (var j = 0, col; col = row.cells[j]; j++){
                 coluna = col.innerHTML.replace(/\s+/g, ' ');
-                if(j == 2){
-                    if(coluna == ' Carregamento '){
+
+                if(j == 4){
+                    if(coluna == ' €0,00 '){
                         debito = false;
                     }
                 }
+
                 if(j == 0 || j == 3 || (j == 4 && debito) || (j == 5 && !debito) || j == 6){
                     if(j == 5){
                         coluna = '+'+coluna;

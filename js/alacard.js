@@ -27,8 +27,6 @@ var alacardExtension = {
 
     balance: null,
 
-    service: 'alacard',
-
     history: null,
 
     options: {},
@@ -54,32 +52,22 @@ var alacardExtension = {
             }
         }
 
-
         document.getElementById('last_update').innerHTML = alacardExtension.dateBuilder(new Date().getTime());
-        var remoteURL = "https://www."+alacardExtension.service+".pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp";
+
+        var remoteURL = 'https://www.euroticket-alacard.pt/alc/pages/login.jsf?windowId=682';
+        var fieldsString = 'loginform=loginform&loginform:username='+alacardExtension.options.auth.cardNumber+'&loginform:password='+
+                            alacardExtension.options.auth.cardPassword+
+                            '&loginform:loginButton=Entrar&javax.faces.ViewState='+encodeURIComponent('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');
 
         var handleFirstPhase = function(html) {
-            var doc = document.createElement("html");
-            doc.innerHTML = html;
-            var key = doc.getElementsByTagName("input")[1].value;
-            var action = doc.getElementsByTagName("form")[0].getAttribute('action');
-
-            remoteURL = 'https://www.'+alacardExtension.service+'.pt/jsp/portlet/consumer/cartao_refeicao/c_login.jsp?_portal=cartao_refeicao&share/key.jsp:KEY='+key+'&consumer/cartao_refeicao/c_login.jsp:login_id_form='+alacardExtension.options.auth.cardNumber+'&consumer/cartao_refeicao/c_login.jsp:password_form='+alacardExtension.options.auth.cardPassword+'&x=40&y=14&consumer/cartao_refeicao/c_login.jsp:submit=not_empty&page.jsp:page=consumer/cartao_refeicao/cartao_refeicao.jsp';
-            alacardExtension.sendRequest('POST', remoteURL, handleSecondPhase);
+            remoteURL = "https://www.euroticket-alacard.pt/alc/pages/private/customer/customer.jsf?windowId=682";
+            alacardExtension.sendRequest('GET', remoteURL, null, handleSecondPhase);
         };
 
         var handleSecondPhase = function(html){
             var tmpDoc = document.createElement('html');
             tmpDoc.innerHTML = html;
-            var balanceElem = tmpDoc.getElementsByClassName('currencyAmountBold');
-            alacardExtension.balance = balanceElem.length > 0 ? balanceElem[0].innerHTML : null;
-            var table;
-            if(alacardExtension.service == 'euroticket-alacard'){
-                table = tmpDoc.getElementsByClassName('columntitle')[0];
-            }else{
-                table = tmpDoc.getElementsByTagName('table')[8];
-            }
-
+            var table = tmpDoc.getElementsByClassName('rf-dt-b')[0];
             alacardExtension.history = table.innerHTML;
 
             // cache it!
@@ -87,27 +75,43 @@ var alacardExtension = {
             tmpDoc = undefined;
             callback();
         };
-        alacardExtension.sendRequest('GET', remoteURL, handleFirstPhase);
+        
+        alacardExtension.sendRequest('POST', remoteURL, fieldsString, handleFirstPhase);
     },
 
-    getHistory: function (){
+    processData: function (){
         var table = document.createElement('table');
         table.innerHTML = alacardExtension.history;
         var allTransactions = [], coluna, debito;
 
         var rows = table.getElementsByTagName('tr');
-        for (var i = 1, row; row = rows[i]; i++){
+        for (var i = 0, row; row = rows[i]; i++){
             debito = true;
             var transaction = [];
             for (var j = 0, col; col = row.cells[j]; j++){
-                coluna = col.innerHTML.replace(/\s+/g, ' ');
 
+                //get content from span
+                if(j > 3){
+                    coluna = col.children[0].innerHTML;
+                }else{
+                    coluna = col.innerHTML;
+                }
+
+                coluna = coluna.replace(/\s+/g, ' ');
+
+                //check if this transaction is debit or credit
                 if(j == 4){
-                    if(coluna == ' €0,00 '){
+                    if(coluna.indexOf('0,00') !== -1){
                         debito = false;
                     }
                 }
 
+                //get balance in first row, last column
+                if(j == 6 && i==0){
+                    alacardExtension.balance = coluna;
+                }
+
+                //validate columns
                 if(j == 0 || j == 3 || (j == 4 && debito) || (j == 5 && !debito) || j == 6){
                     if(j == 5){
                         coluna = '+'+coluna;
@@ -119,9 +123,6 @@ var alacardExtension = {
             }
             allTransactions.push(transaction);
         }
-
-        //remove last row, containing pagination elements
-        allTransactions.pop();
 
         var html = '';
         for(var i=0, mlength = allTransactions.length; i<mlength; i++){
@@ -135,16 +136,20 @@ var alacardExtension = {
         document.getElementById('thistorico').innerHTML = html;
     },
 
-    sendRequest: function(method, url, callback){
+    sendRequest: function(method, url, data, callback){
         var xhr = new XMLHttpRequest();
         xhr.open(method, url, true);
-
         xhr.onreadystatechange = function(){
             if (this.readyState === 4 && this.status === 200){
                 callback(xhr.responseText);
             }
         }
-        xhr.send();
+        if(data){
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(data);
+        }else{
+            xhr.send();
+        }
     },
 
     checkLogin: function(callback){
@@ -235,17 +240,9 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     var initHandler = function(){
+        alacardExtension.processData();
         var balance = alacardExtension.balance;
         document.getElementById('balance_placeholder').innerHTML = balance ? balance : 'erro';
-
-        if(!balance && alacardExtension.service != 'euroticket-alacard'){
-            alacardExtension.service = 'euroticket-alacard';
-            alacardExtension.init(initHandler, true);
-        }
-
-        if(balance){
-            alacardExtension.getHistory();
-        }
     }
 
     var loginHandler = function(hasCredentials){
